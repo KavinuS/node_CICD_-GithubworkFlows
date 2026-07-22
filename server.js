@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 
 app.get("/api/fake", async((req,res)=>{
   await fetch("http://jsonplaceholder.typecode.com/todos/1")
-  .then(response => response.json)
+  .then(response => response.json())
   .then(data => res.send(data))
 }))
 });
