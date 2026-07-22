@@ -10,13 +10,27 @@ app.use(cors());
 app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Helloooo Kavinu!");
-
-app.get("/api/fake", async((req,res)=>{
-  await fetch("http://jsonplaceholder.typecode.com/todos/1")
-  .then(response => response.json())
-  .then(data => res.send(data))
-}))
 });
+
+// Fake API route
+app.get("/api/fake", async (req, res) => {
+  try {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/todos/1"
+    );
+
+    const data = await response.json();
+
+    res.json(data);
+  } catch (error) {
+    console.error("Fake API error:", error);
+
+    res.status(500).json({
+      message: "Failed to retrieve fake data",
+    });
+  }
+});
+
 
 mongoose
   .connect(process.env.MONGO_URI)
