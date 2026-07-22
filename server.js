@@ -10,6 +10,12 @@ app.use(cors());
 app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Helloooo Kavinu!");
+
+app.get("/api/fake", async((req,res)=>{
+  await fetch("http://jsonplaceholder.typecode.com/todos/1")
+  .then(response => response.json)
+  .then(data => res.send(data))
+}))
 });
 
 mongoose
